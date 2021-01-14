@@ -1,19 +1,30 @@
 from .base_page import BasePage
 from selenium.webdriver.common.by import By
+import time
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 
 
 class MainPage(BasePage):
+    q = 1
+
     def go_to_login_page(self):
         login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
         login_link.click()
 
-    def is_element_present(self, how, what):
-        try:
-            self.browser.find_element(how, what)
-        except (NoSuchElementException):
-            return False
-        return True
+    def click_bucket(self):
+        bucket = self.browser.find_element(By.XPATH, "//*[@id='add_to_basket_form']/button")
+        bucket.click()
 
-    def should_be_login_link(self):
-        assert self.is_element_present(By.CSS_SELECTOR, "#login_link_invalid"), "Login link is not presented"
+    def text_bucket(self):
+        bucket = self.browser.find_element(By.XPATH, "//h1")
+        return bucket.text
+
+    def check_bucket(self):
+        bucket = self.browser.find_element(By.XPATH, "//h1")
+        assert bucket.text == self.text_bucket()
+
+
+
+
