@@ -1,6 +1,8 @@
 import math
 import time
 from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
 
 
 class BasePage():
@@ -27,4 +29,8 @@ class BasePage():
             time.sleep(2)
         except NoAlertPresentException:
             print("No second alert presented")
+
+
+
+
 
